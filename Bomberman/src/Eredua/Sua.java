@@ -7,7 +7,7 @@ public class Sua {
 	private int x;
 	private int y;
 	private Timer timer=null;
-	private int kont=3;
+	private int kont=2;
 	private boolean biSegundoPasa=false;
 	
 	public Sua(int pX, int pY) {

@@ -72,7 +72,7 @@ public class Laukia extends Observable {
 		if(this.bloke instanceof BlokeBiguna || this.bloke==null) {
 			this.bloke=null;
 			if (this.bomba!=null) {
-				this.bomba.setKont(1);
+				this.bomba.setKont(3);
 			}
 			setChanged();
 			notifyObservers("SuaJarri");}}

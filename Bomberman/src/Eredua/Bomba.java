@@ -6,7 +6,7 @@ import java.util.TimerTask;
 public class Bomba extends Observable {
 	private int x;
 	private int y;
-	private int kont = 4;
+	private int kont = 30;
 	private Timer timer=null;
 	
 	public Bomba(int pX, int pY) {
@@ -19,16 +19,16 @@ public class Bomba extends Observable {
 			}		
 		};
 		timer = new Timer();
-		timer.scheduleAtFixedRate(timerTask, 0, 1000);
+		timer.scheduleAtFixedRate(timerTask, 0, 100);
 	}
 	private void updateKont() {
 		kont--;
 		System.out.println("Kont: "+kont);
-		if (kont==2) {
+		if (kont==20) {
 			setChanged();
 			notifyObservers("Bomba2");
 		}
-		else if (kont==1) {
+		else if (kont==10) {
 			setChanged();
 			notifyObservers("Bomba1");
 		}
