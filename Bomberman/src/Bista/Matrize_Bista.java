@@ -55,7 +55,7 @@ public class Matrize_Bista extends JFrame implements Observer {
 
                 // Obtener el formato original
                 AudioFormat baseFormat = originalStream.getFormat();
-                AudioFormat targetFormat = new AudioFormat(
+                /*AudioFormat targetFormat = new AudioFormat(
                     AudioFormat.Encoding.PCM_SIGNED, // Cambio a PCM_SIGNED
                     44100, // Frecuencia de muestreo compatible
                     16,    // 16-bit
@@ -63,13 +63,14 @@ public class Matrize_Bista extends JFrame implements Observer {
                     baseFormat.getChannels() * 2,
                     44100,
                     false
-                );
+                );*/
 
                 // Convertir el AudioInputStream
-                AudioInputStream convertedStream = AudioSystem.getAudioInputStream(targetFormat, originalStream);
+               // AudioInputStream convertedStream = AudioSystem.getAudioInputStream(targetFormat, originalStream);
 
                 Clip clip = AudioSystem.getClip();
-                clip.open(convertedStream);
+                //clip.open(convertedStream);
+                clip.open(originalStream);
                 clip.start();
 
             } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
@@ -104,7 +105,7 @@ public class Matrize_Bista extends JFrame implements Observer {
         controller = new BombermanController();
         addKeyListener(controller);
         requestFocusInWindow();
-        SoundPlayer.playSound("/soinuak/music.wav");// Asegurar que la ventana tenga el foco
+        SoundPlayer.playSound("/soinuak/music (2).wav");// Asegurar que la ventana tenga el foco
     }
 
     public static void gehituLaukia(Laukia_Bista pLaukiaBista) {
@@ -121,31 +122,40 @@ public class Matrize_Bista extends JFrame implements Observer {
     	this.x=hX;
     	this.y=hY;
     }
-    private class BombermanController extends Observable implements KeyListener {
+    public class BombermanController extends Observable implements KeyListener {
+        private long lastPressTime = 0; // Guarda el tiempo del último input
+        private static final int DELAY = 100; // 200 ms de delay entre inputs
+
+        public BombermanController() {
+            // Constructor sin Timer, usamos tiempo manual
+        }
+
         @Override
         public void keyPressed(KeyEvent e) {
-            int keyCode = e.getKeyCode();
-            switch (keyCode) {
-                case KeyEvent.VK_W:
-                    Eredua.MatrizeClassic.getNireMatrizea().mugituBomberman('W');
-                    Matrize_Bista.SoundPlayer.playSound("/soinuak/Walking1.wav");
-                    break;
-                case KeyEvent.VK_S:
-                    Eredua.MatrizeClassic.getNireMatrizea().mugituBomberman('S');
-                    Matrize_Bista.SoundPlayer.playSound("/soinuak/Walking1.wav");
-                    break;
-                case KeyEvent.VK_A:
-                    Eredua.MatrizeClassic.getNireMatrizea().mugituBomberman('A');
-                    Matrize_Bista.SoundPlayer.playSound("/soinuak/Walking1.wav");
-                    break;
-                case KeyEvent.VK_D:
-                    Eredua.MatrizeClassic.getNireMatrizea().mugituBomberman('D');
-                    Matrize_Bista.SoundPlayer.playSound("/soinuak/Walking1.wav");
-                    break;
-                case KeyEvent.VK_SPACE:
-					Eredua.MatrizeClassic.getNireMatrizea().getBomberman().bombaJarri();
-					break;
+            long now = System.currentTimeMillis();
+            if (now - lastPressTime >= DELAY) { // Verifica si pasó el tiempo suficiente
+                lastPressTime = now;
+
+                int keyCode = e.getKeyCode();
+                switch (keyCode) {
+                    case KeyEvent.VK_W:
+                        Eredua.MatrizeClassic.getNireMatrizea().mugituBomberman('W');
+                        break;
+                    case KeyEvent.VK_S:
+                        Eredua.MatrizeClassic.getNireMatrizea().mugituBomberman('S');
+                        break;
+                    case KeyEvent.VK_A:
+                        Eredua.MatrizeClassic.getNireMatrizea().mugituBomberman('A');
+                        break;
+                    case KeyEvent.VK_D:
+                        Eredua.MatrizeClassic.getNireMatrizea().mugituBomberman('D');
+                        break;
+                    case KeyEvent.VK_SPACE:
+                        Eredua.MatrizeClassic.getNireMatrizea().getBomberman().bombaJarri();
+                        break;
+                }
             }
+            SoundPlayer.playSound("/soinuak/Walking1.wav");
         }
 
         @Override
@@ -153,7 +163,7 @@ public class Matrize_Bista extends JFrame implements Observer {
 
         @Override
         public void keyReleased(KeyEvent e) {}
-    }
+    } 
 
 
 	
