@@ -68,7 +68,7 @@ public abstract class Bomberman extends Observable {
 	       
 	        this.y--;
 	        setChanged();
-	        notifyObservers(new Object[]{"MoveA",x,y,norabide});
+	        notifyObservers(new Object[]{"MoveA",x,y});
 	        //System.out.println("MugituBomberman");
 	    }
 	    if ((norabide == 'D' && this.y < 16)&&
@@ -77,7 +77,7 @@ public abstract class Bomberman extends Observable {
 	        
 	    	this.y++;
 	        setChanged();
-	        notifyObservers(new Object[]{"MoveD",x,y,norabide});
+	        notifyObservers(new Object[]{"MoveD",x,y});
 	        //System.out.println("MugituBomberman");
 	    }
 	    if ((norabide == 'W' && this.x > 0)&&
@@ -86,7 +86,7 @@ public abstract class Bomberman extends Observable {
 	    		
 	    	this.x--;
 	        setChanged();
-	        notifyObservers(new Object[]{"MoveW",x,y,norabide});
+	        notifyObservers(new Object[]{"MoveW",x,y});
 	       // System.out.println("MugituBomberman");
 	    }
 	    if ((norabide == 'S' && this.x < 10)&&
@@ -95,17 +95,19 @@ public abstract class Bomberman extends Observable {
 	    	
 	    	this.x++;
 	        setChanged();
-	        notifyObservers(new Object[]{"MoveS",x,y,norabide});
+	        notifyObservers(new Object[]{"MoveS",x,y});
 	        //System.out.println("MugituBomberman" + x + ", "  + y);
 	    }
 	    else {
 	    	setChanged();
-	    	notifyObservers(norabide);
+	    	notifyObservers(new Object[] {"MoveEz",norabide});
 	    }
 	    
 
 	}
-
+	public int getBombaKop() {
+		return bombaKop;
+	}
 	public abstract void bombaJarri() ;
 
 	

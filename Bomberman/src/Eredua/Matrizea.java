@@ -118,5 +118,5 @@ public abstract class Matrizea extends Observable{
 		notifyObservers("Jokua amaitu da");
 		
 	}
-	
+
 }

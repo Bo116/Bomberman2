@@ -11,8 +11,6 @@ public class Laukia extends Observable {
 	private Bloke bloke=null;
 	private Bomba bomba=null;
 	private Sua sua=null;
-	/*private Timer timer=null;
-	private int kont=3;*/
 	
 	public Laukia(int pX, int pY) {
 		this.x=pX;
@@ -60,9 +58,6 @@ public class Laukia extends Observable {
 	}
 	public void bombaKendu() {
 		this.bomba=null;
-		
-		//setChanged();
-		//notifyObservers("BombaKendu");
 	}
 	public void suaJarri() {
 		if (this.sua!=null) {
@@ -82,7 +77,6 @@ public class Laukia extends Observable {
 			this.sua=null;
 			setChanged();
 			notifyObservers("SuaKendu");
-			System.out.println("Sua kendu da");
 		}
 	}
 	

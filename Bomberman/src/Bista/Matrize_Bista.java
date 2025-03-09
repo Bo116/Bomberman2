@@ -1,5 +1,6 @@
 package Bista;
-
+import javax.swing.*;
+import java.awt.event.*;
 import Eredua.Bomberman;
 import Eredua.MatrizeClassic;
 import javax.sound.sampled.*;
@@ -95,7 +96,7 @@ public class Matrize_Bista extends JFrame implements Observer {
         URL imageUrl = getClass().getResource("/Irudiak/back.png"); // Ruta de la imagen
         img = Toolkit.getDefaultToolkit().getImage(imageUrl);  // Cargar la imagen
 
-        contentPane.setBorder(new EmptyBorder(1, 1, 5, 5));
+        //contentPane.setBorder(new EmptyBorder(1, 1, 5, 5));
         contentPane.setLayout(new GridLayout(11, 17, 0, 0));
         setContentPane(contentPane);
 
@@ -116,39 +117,28 @@ public class Matrize_Bista extends JFrame implements Observer {
     
     public void mugituBomberman(int hX, int hY, String pNorabidea) {
     	bilatuLaukia(x, y).bombermanKendu();
-    	bilatuLaukia(hX, hY).bombermanJarri(pNorabidea);
+    	bilatuLaukia(hX, hY).bombermanAldatu(pNorabidea);
     	this.x=hX;
     	this.y=hY;
     }
-/*
-    @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("Update recibido: " + arg);
-    }
-*/
-    // Controlador de teclado separado de "Controler"
     private class BombermanController extends Observable implements KeyListener {
         @Override
         public void keyPressed(KeyEvent e) {
             int keyCode = e.getKeyCode();
             switch (keyCode) {
                 case KeyEvent.VK_W:
-                    //System.out.println("parriba");
                     Eredua.MatrizeClassic.getNireMatrizea().mugituBomberman('W');
                     Matrize_Bista.SoundPlayer.playSound("/soinuak/Walking1.wav");
                     break;
                 case KeyEvent.VK_S:
-                    //System.out.println("pabajo");
                     Eredua.MatrizeClassic.getNireMatrizea().mugituBomberman('S');
                     Matrize_Bista.SoundPlayer.playSound("/soinuak/Walking1.wav");
                     break;
                 case KeyEvent.VK_A:
-                    //System.out.println("paizda");
                     Eredua.MatrizeClassic.getNireMatrizea().mugituBomberman('A');
                     Matrize_Bista.SoundPlayer.playSound("/soinuak/Walking1.wav");
                     break;
                 case KeyEvent.VK_D:
-                    //System.out.println("padcha");
                     Eredua.MatrizeClassic.getNireMatrizea().mugituBomberman('D');
                     Matrize_Bista.SoundPlayer.playSound("/soinuak/Walking1.wav");
                     break;
@@ -178,7 +168,8 @@ public class Matrize_Bista extends JFrame implements Observer {
 					;
 				}
 			}
-			bilatuLaukia(0,0).bombermanJarri("W");
+			bilatuLaukia(0,0).bombermanAldatu("S");
+			
 			this.x = 0;
 			this.y = 0;
 		}
@@ -216,19 +207,14 @@ public class Matrize_Bista extends JFrame implements Observer {
 						int j = (int) obj[2];
 						this.mugituBomberman(i, j,"S") ;
 					}	
-				//System.out.println("WASD");
-			
-			/*else if (obj[0].equals("BombaJarri")) {
-				int i = (int) obj[1];
-				int j = (int) obj[2];
-				this.bilatuLaukia(i, j).bombaJarri();
-								
-			}*/
-		}
-		else if (arg instanceof Character) {
-			this.bilatuLaukia(x, y).bombermanAldatu(arg.toString());
+			else if(obj[0].equals("MoveEz")) {
+				Character norabide = (char) obj[1];
+				this.bilatuLaukia(x, y).bombermanAldatu(norabide.toString());
+			}
+
 		}
 		else if(arg.equals("Jokua amaitu da")) {
+			SoundPlayer.playSound("/soinuak/Bomberman Dies.wav");
 			 Object[] opciones = {"Ados"};
 			JOptionPane.showOptionDialog(
 		            getNireMatrizea(),               // Componente padre (puedes poner 'null' para que no tenga padre)
@@ -242,13 +228,6 @@ public class Matrize_Bista extends JFrame implements Observer {
 		        );
 			System.exit(0);
 		}
-		else {System.out.println("BombaJarri");}
 		
 	}
-	
-	/*@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}*/
 }

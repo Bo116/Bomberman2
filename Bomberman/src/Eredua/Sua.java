@@ -24,7 +24,6 @@ public class Sua {
 	}
 	private void updateKont() {
 		kont--;
-		System.out.println("sua"+kont);
 		if(kont==0) {
 			MatrizeClassic.getNireMatrizea().suaKendu(x,y);
 		}

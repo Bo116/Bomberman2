@@ -23,7 +23,6 @@ public class Bomba extends Observable {
 	}
 	private void updateKont() {
 		kont--;
-		System.out.println("Kont: "+kont);
 		if (kont==20) {
 			setChanged();
 			notifyObservers("Bomba2");
@@ -34,8 +33,6 @@ public class Bomba extends Observable {
 		}
 		else if (kont == 0) {
 			MatrizeClassic.getNireMatrizea().bombaKendu(x, y);
-			
-			//kont=4; // 3, 2, 1, explota
 			timer.cancel();
 		}
 		
