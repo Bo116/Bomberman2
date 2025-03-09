@@ -38,10 +38,8 @@ public abstract class Bomberman extends Observable {
 		}
 		//System.out.println("Kont: "+kontSua);
 		if(bombaKop == 0) {
-			System.out.println("Bomba kopurua agortu da");
 			kontBomba--;
 			if (kontBomba == 0) {
-				System.out.println("Bomba kopurua gehi bat");
 				kontBomba = 30;
 				bombaKop++;
 			}
